@@ -26,14 +26,27 @@ namespace ConsoleApplication1
                 Environment.Exit(1);
             }
 
-            Random r = new Random();
+            Random r = new Random((int) DateTime.Now.Ticks & 0x0000FFFF);
             StreamWriter sw;
 
-            using (sw = new StreamWriter("C:\\numbers.txt"))
+            using (sw = new StreamWriter("C:\\asdf.csv"))
             {
+                long summation = 0;
+
                 for (long i = 0; i <= loopCount; i++)
                 {
-                    sw.WriteLine(r.Next(0, 2).ToString());
+                    int numberGen = r.Next(0, 2);
+
+                    if (numberGen == 1)
+                    {
+                        summation++;
+                    }
+                    else
+                    {
+                        summation--;
+                    }
+
+                    sw.WriteLine(summation.ToString());
                 }
             }
 
